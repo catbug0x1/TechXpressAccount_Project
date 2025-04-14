@@ -1,0 +1,177 @@
+﻿@using AccountProject.BusinessLogicLayer.DTOs
+
+@model RegisterUserDTO
+
+@{
+    ViewData["Title"] = "Register";
+}
+
+<div class="register-container">
+    <div class="register-card">
+        <div class="register-header">
+            <div class="brand-logo">
+                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M20 7L12 3L4 7V17L12 21L20 17V7Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 12L12 21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 12L20 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                    <path d="M12 12L4 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+                </svg>
+            </div>
+            <h1 class="register-title">Create Account</h1>
+            <p class="register-subtitle">Fill in the details to get started</p>
+            <svg class="header-wave" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
+                <path fill-opacity="1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,133.3C672,139,768,181,864,176C960,171,1056,117,1152,101.3C1248,85,1344,107,1392,117.3L1440,128L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path>
+            </svg>
+        </div>
+
+        <div class="register-body">
+            <form asp-action="Register" method="post" id="registerForm">
+                <div asp-validation-summary="ModelOnly" class="text-danger validation-summary"></div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="UserName" class="form-control custom-input" id="floatingUsername" placeholder="Username">
+                    <label asp-for="UserName" for="floatingUsername">Username</label>
+                    <span asp-validation-for="UserName" class="text-danger validation-message"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="Email" class="form-control custom-input" id="floatingEmail" placeholder="name@example.com">
+                    <label asp-for="Email" for="floatingEmail">Email address</label>
+                    <span asp-validation-for="Email" class="text-danger validation-message"></span>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="Password" type="password" class="form-control custom-input" id="floatingPassword" placeholder="Password">
+                    <label asp-for="Password" for="floatingPassword">Password</label>
+                    <span asp-validation-for="Password" class="text-danger validation-message"></span>
+                    <button type="button" class="password-toggle" onclick="togglePassword('floatingPassword')">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+
+                <div class="form-floating mb-4">
+                    <input asp-for="ConfirmPassword" type="password" class="form-control custom-input" id="floatingConfirmPassword" placeholder="Confirm Password">
+                    <label asp-for="ConfirmPassword" for="floatingConfirmPassword">Confirm Password</label>
+                    <span asp-validation-for="ConfirmPassword" class="text-danger validation-message"></span>
+                    <button type="button" class="password-toggle" onclick="togglePassword('floatingConfirmPassword')">
+                        <i class="bi bi-eye"></i>
+                    </button>
+                </div>
+
+                <div class="password-strength mb-4" id="passwordStrength">
+                    <div class="progress">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="password-requirements">
+                        <p class="requirement" id="req-length"><i class="bi bi-x-circle"></i> At least 8 characters</p>
+                        <p class="requirement" id="req-uppercase"><i class="bi bi-x-circle"></i> At least 1 uppercase letter</p>
+                        <p class="requirement" id="req-lowercase"><i class="bi bi-x-circle"></i> At least 1 lowercase letter</p>
+                        <p class="requirement" id="req-number"><i class="bi bi-x-circle"></i> At least 1 number</p>
+                        <p class="requirement" id="req-special"><i class="bi bi-x-circle"></i> At least 1 special character</p>
+                    </div>
+                </div>
+
+                <div class="form-check terms-checkbox mb-4">
+                    <input class="form-check-input custom-checkbox" type="checkbox" id="agreeTerms" required>
+                    <label class="form-check-label" for="agreeTerms">
+                        I agree to the <a href="#" class="terms-link">Terms of Service</a> and <a href="#" class="terms-link">Privacy Policy</a>
+                    </label>
+                </div>
+
+                <button type="submit" class="btn btn-primary register-button">
+                    <span>Create Account</span>
+                </button>
+            </form>
+
+            <div class="login-link">
+                <p>Already have an account? <a asp-action="Login">Sign in</a></p>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <script>
+        function togglePassword(inputId) {
+            const passwordInput = document.getElementById(inputId);
+            const toggleButton = passwordInput.parentElement.querySelector('.password-toggle');
+            const icon = toggleButton.querySelector('i');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                icon.classList.remove('bi-eye');
+                icon.classList.add('bi-eye-slash');
+            } else {
+                passwordInput.type = 'password';
+                icon.classList.remove('bi-eye-slash');
+                icon.classList.add('bi-eye');
+            }
+        }
+
+        // Password strength checker - simplified
+        document.getElementById('floatingPassword').addEventListener('input', function() {
+            const password = this.value;
+            let strength = 0;
+            const progressBar = document.querySelector('.progress-bar');
+
+            // Check requirements
+            if (password.length >= 8) {
+                document.getElementById('req-length').innerHTML = '<i class="bi bi-check-circle"></i> At least 8 characters';
+                document.getElementById('req-length').classList.add('met');
+                strength += 20;
+            } else {
+                document.getElementById('req-length').innerHTML = '<i class="bi bi-x-circle"></i> At least 8 characters';
+                document.getElementById('req-length').classList.remove('met');
+            }
+
+            if (/[A-Z]/.test(password)) {
+                document.getElementById('req-uppercase').innerHTML = '<i class="bi bi-check-circle"></i> At least 1 uppercase letter';
+                document.getElementById('req-uppercase').classList.add('met');
+                strength += 20;
+            } else {
+                document.getElementById('req-uppercase').innerHTML = '<i class="bi bi-x-circle"></i> At least 1 uppercase letter';
+                document.getElementById('req-uppercase').classList.remove('met');
+            }
+
+            if (/[a-z]/.test(password)) {
+                document.getElementById('req-lowercase').innerHTML = '<i class="bi bi-check-circle"></i> At least 1 lowercase letter';
+                document.getElementById('req-lowercase').classList.add('met');
+                strength += 20;
+            } else {
+                document.getElementById('req-lowercase').innerHTML = '<i class="bi bi-x-circle"></i> At least 1 lowercase letter';
+                document.getElementById('req-lowercase').classList.remove('met');
+            }
+
+            if (/[0-9]/.test(password)) {
+                document.getElementById('req-number').innerHTML = '<i class="bi bi-check-circle"></i> At least 1 number';
+                document.getElementById('req-number').classList.add('met');
+                strength += 20;
+            } else {
+                document.getElementById('req-number').innerHTML = '<i class="bi bi-x-circle"></i> At least 1 number';
+                document.getElementById('req-number').classList.remove('met');
+            }
+
+            if (/[^A-Za-z0-9]/.test(password)) {
+                document.getElementById('req-special').innerHTML = '<i class="bi bi-check-circle"></i> At least 1 special character';
+                document.getElementById('req-special').classList.add('met');
+                strength += 20;
+            } else {
+                document.getElementById('req-special').innerHTML = '<i class="bi bi-x-circle"></i> At least 1 special character';
+                document.getElementById('req-special').classList.remove('met');
+            }
+
+            // Update progress bar
+            progressBar.style.width = strength + '%';
+            progressBar.setAttribute('aria-valuenow', strength);
+
+            // Set progress bar color based on strength
+            if (strength <= 20) {
+                progressBar.className = 'progress-bar bg-danger';
+            } else if (strength <= 60) {
+                progressBar.className = 'progress-bar bg-warning';
+            } else {
+                progressBar.className = 'progress-bar bg-success';
+            }
+        });
+    </script>
+}

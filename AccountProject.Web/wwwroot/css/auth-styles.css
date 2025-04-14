@@ -1,0 +1,400 @@
+﻿/* Import Bootstrap Icons */
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css");
+
+/* Import custom font */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+:root {
+    --primary-color: #4361ee;
+    --primary-hover: #3a56d4;
+    --secondary-color: #2b2d42;
+    --accent-color: #f72585;
+    --success-color: #2ecc71;
+    --warning-color: #f39c12;
+    --danger-color: #e74c3c;
+    --light-bg: #f8f9fa;
+    --border-color: #e0e0e0;
+    --text-color: #333;
+    --text-muted: #6c757d;
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.08);
+    --shadow-lg: 0 10px 25px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+}
+
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background: linear-gradient(135deg, #f5f7ff 0%, #e3e9ff 100%);
+    color: var(--text-color);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Login and Register Container Styles */
+.login-container,
+.register-container {
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 2rem;
+    background: linear-gradient(135deg, #f5f7ff 0%, #e3e9ff 100%);
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.login-card,
+.register-card {
+    width: 100%;
+    max-width: 500px;
+    background-color: white;
+    border-radius: 16px;
+    box-shadow: var(--shadow-lg);
+    overflow: hidden;
+    position: relative;
+    animation: fadeIn 0.5s ease-out;
+}
+
+.login-header,
+.register-header {
+    padding: 2.5rem 2rem;
+    text-align: center;
+    background: linear-gradient(135deg, #4361ee 0%, #3a56d4 100%);
+    color: white;
+    position: relative;
+}
+
+.brand-logo {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 1.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+    color: var(--primary-color);
+    border-radius: 12px;
+    box-shadow: var(--shadow-md);
+}
+
+.login-title,
+.register-title {
+    font-size: 1.75rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+    color: white;
+}
+
+.login-subtitle,
+.register-subtitle {
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 0.95rem;
+}
+
+.login-body,
+.register-body {
+    padding: 2rem;
+}
+
+/* Form Styles */
+.form-floating {
+    position: relative;
+}
+
+    .form-floating > .form-control {
+        padding: 1.5rem 1rem 0.5rem;
+        height: calc(3.5rem + 2px);
+        line-height: 1.25;
+    }
+
+    .form-floating > label {
+        padding: 1rem 1rem 0;
+    }
+
+.custom-input {
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+    .custom-input:focus {
+        border-color: var(--primary-color);
+        box-shadow: 0 0 0 0.2rem rgba(67, 97, 238, 0.15);
+    }
+
+/* Password Toggle Button - Fixed Positioning */
+.password-toggle {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: var(--text-muted);
+    cursor: pointer;
+    z-index: 10;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+    .password-toggle:hover {
+        color: var(--primary-color);
+    }
+
+    .password-toggle i {
+        font-size: 1.2rem;
+    }
+
+.login-button,
+.register-button {
+    width: 100%;
+    padding: 0.75rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 8px;
+    background-color: var(--primary-color);
+    border: none;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    transition: var(--transition);
+    margin-top: 1rem;
+}
+
+    .login-button:hover,
+    .register-button:hover {
+        background-color: var(--primary-hover);
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
+    }
+
+    .login-button:active,
+    .register-button:active {
+        transform: translateY(0);
+        box-shadow: var(--shadow-sm);
+    }
+
+.forgot-password {
+    color: var(--primary-color);
+    font-size: 0.875rem;
+    text-decoration: none;
+    font-weight: 500;
+    transition: var(--transition);
+}
+
+    .forgot-password:hover {
+        text-decoration: underline;
+    }
+
+.remember-me-container {
+    font-size: 0.875rem;
+}
+
+.custom-checkbox {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+}
+
+    .custom-checkbox:checked {
+        background-color: var(--primary-color);
+        border-color: var(--primary-color);
+    }
+
+/* Validation Summary */
+.validation-summary {
+    background-color: rgba(231, 76, 60, 0.1);
+    border-left: 4px solid var(--danger-color);
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1.5rem;
+}
+
+.validation-message {
+    font-size: 0.8rem;
+    margin-top: 0.25rem;
+    color: var(--danger-color);
+}
+
+/* Password Strength Indicator */
+.password-strength {
+    margin-top: -1rem;
+    margin-bottom: 1.5rem;
+}
+
+    .password-strength .progress {
+        height: 6px;
+        border-radius: 3px;
+        margin-bottom: 1rem;
+        background-color: #eee;
+    }
+
+.password-requirements {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 0.5rem;
+}
+
+.requirement {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin: 0;
+    transition: var(--transition);
+}
+
+    .requirement i {
+        font-size: 1rem;
+    }
+
+    .requirement.met {
+        color: var(--success-color);
+    }
+
+.bi-x-circle {
+    color: var(--danger-color);
+}
+
+.bi-check-circle {
+    color: var(--success-color);
+}
+
+/* Terms Checkbox */
+.terms-checkbox {
+    margin-bottom: 1.5rem;
+}
+
+.terms-link {
+    color: var(--primary-color);
+    text-decoration: none;
+}
+
+    .terms-link:hover {
+        text-decoration: underline;
+    }
+
+/* Register/Login Link */
+.register-link,
+.login-link {
+    text-align: center;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border-color);
+}
+
+    .register-link a,
+    .login-link a {
+        color: var(--primary-color);
+        font-weight: 600;
+        text-decoration: none;
+        transition: var(--transition);
+    }
+
+        .register-link a:hover,
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+/* Responsive Adjustments */
+@media (max-width: 576px) {
+    .login-container,
+    .register-container {
+        padding: 1rem;
+    }
+
+    .login-card,
+    .register-card {
+        border-radius: 12px;
+    }
+
+    .login-header,
+    .register-header {
+        padding: 1.5rem 1rem;
+    }
+
+    .login-body,
+    .register-body {
+        padding: 1.5rem 1rem;
+    }
+
+    .password-requirements {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Wavy Background Decoration */
+.header-wave {
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 24px;
+    fill: white;
+}
+
+/* Add visual focus effect for tab navigation */
+.form-control:focus,
+.btn:focus,
+.form-check-input:focus {
+    outline: 2px solid rgba(67, 97, 238, 0.25);
+    outline-offset: 2px;
+}
+
+/* Improved wave animation */
+.header-wave {
+    transform-origin: bottom;
+    animation: wave 10s ease-in-out infinite alternate;
+}
+
+@keyframes wave {
+    0% {
+        transform: scaleY(1.0) translateY(0);
+    }
+
+    50% {
+        transform: scaleY(1.1) translateY(-2px);
+    }
+
+    100% {
+        transform: scaleY(1.0) translateY(0);
+    }
+}
+
+/* Add subtle hover effect to cards */
+.login-card:hover,
+.register-card:hover {
+    transform: translateY(-5px);
+    transition: transform 0.3s ease;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.12);
+}
